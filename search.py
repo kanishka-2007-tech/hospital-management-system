@@ -41,6 +41,35 @@ def open_search(parent_frame):
               command=do_search
               ).grid(row=1, column=2, padx=4)
 
+    def delete_selected():
+        selected = tree.focus()
+        if not selected:
+            messagebox.showwarning("No Selection", "Please click on a patient to select them first.")
+            return
+        pid = int(selected)
+        patient = db.get_patient(pid)
+        if not patient:
+            return
+        confirm = messagebox.askyesno(
+            "Delete Patient",
+            f"Are you sure you want to delete:\n\n"
+            f"  Name: {patient['name']}\n"
+            f"  ID  : {patient['id']}\n\n"
+            "This will also delete all their lab reports."
+        )
+        if confirm:
+            db.delete_patient(pid)
+            report_text.config(state="normal")
+            report_text.delete("1.0", "end")
+            report_text.config(state="disabled")
+            load_all()
+            messagebox.showinfo("Deleted", f"Patient '{patient['name']}' has been deleted.")
+
+    tk.Button(parent_frame, text="🗑 Delete Patient", font=FONT_LABEL,
+              bg="#e53935", fg="white", relief="flat", padx=12,
+              cursor="hand2", command=delete_selected
+              ).grid(row=1, column=3, padx=8)
+
     search_entry.bind("<Return>", lambda e: do_search())
 
     # ── Results table ─────────────────────────────────────────────────

@@ -4,7 +4,7 @@ import mysql.connector
 #  UPDATE THESE with your MySQL credentials
 DB_HOST = "localhost"
 DB_USER = "root"
-DB_PASSWORD = "your_password"   # <-- change this
+DB_PASSWORD = "kanishka2307"
 DB_NAME = "hospital_db"
 # ─────────────────────────────────────────────
 
@@ -70,6 +70,17 @@ def get_all_patients():
     cursor.close()
     conn.close()
     return rows
+
+
+def delete_patient(patient_id):
+    """Delete a patient and all their lab reports (CASCADE handles reports)."""
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM patients WHERE id = %s", (patient_id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
 
 
 # ── Lab Reports ────────────────────────────────
