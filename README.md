@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 🏥 Hospital Management System
 
 A desktop application built with **Python** and **MySQL** that stores patient information and automatically generates lab reports based on the entered details.
@@ -27,11 +27,3 @@ The core idea of this application is to digitize the patient management workflow
 **Kanishka Gupta**  
 Software Engineer
 
-=======
-# hospital-management-system
-connectivity of mysql and python.
-<br>
-storing the data in a computer system
-
-author-kanishka Gupta 
->>>>>>> 50520e9f94b243bc3fd60d36f33edf3d54bc75e0
