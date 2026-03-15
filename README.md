@@ -1,11 +1,10 @@
-
 # 🏥 Hospital Management System
 
 A desktop application built with **Python** and **MySQL** that stores patient information and automatically generates lab reports based on the entered details.
 
 ## 💡 Project Idea
 
-The core idea of this application is to digitize the patient management workflow in a hospital or clinic. Staff can enter a patient's personal and medical details into the system, and the application will automatically generate a formatted **lab report** based on those inputs — eliminating manual paperwork and reducing errors.
+The core idea of this application is to digitalize the patient management workflow in a hospital or clinic. Staff can enter a patient's personal and medical details into the system, and the application will automatically generate a formatted **lab report** based on those inputs — eliminating manual paperwork and reducing errors.
 
 ## ✨ Features
 
