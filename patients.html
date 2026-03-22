@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Patients — MediCore{% endblock %}
+{% block content %}
+<div class="page-header" style="display:flex;align-items:center;justify-content:space-between;">
+  <div>
+    <h2>Patients</h2>
+    <p>{{ patients|length }} record(s) found</p>
+  </div>
+  <a href="{{ url_for('add_patient') }}" class="btn btn-primary">➕ Add Patient</a>
+</div>
+
+<div class="card">
+  <form class="search-bar" method="GET">
+    <input type="text" name="q" value="{{ query }}" placeholder="🔍  Search by name, disease, or phone...">
+    <button type="submit" class="btn btn-primary">Search</button>
+    {% if query %}<a href="{{ url_for('patients') }}" class="btn" style="background:#f0f4ff;color:var(--primary);">✕ Clear</a>{% endif %}
+  </form>
+
+  {% if patients %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#ID</th><th>Name</th><th>Age</th><th>Gender</th>
+          <th>Phone</th><th>Condition</th><th>Registered</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in patients %}
+        <tr>
+          <td><span class="badge badge-blue">#{{ p[0] }}</span></td>
+          <td><strong>{{ p[1] }}</strong></td>
+          <td>{{ p[2] }}</td>
+          <td>
+            {% if p[3]=='Male' %}<span class="badge badge-blue">♂ Male</span>
+            {% elif p[3]=='Female' %}<span class="badge badge-red">♀ Female</span>
+            {% else %}<span class="badge" style="background:#f3e8ff;color:#7c3aed;">{{ p[3] }}</span>{% endif %}
+          </td>
+          <td>📞 {{ p[4] or '—' }}</td>
+          <td>{% if p[6] %}<span class="badge badge-orange">🦠 {{ p[6] }}</span>{% else %}—{% endif %}</td>
+          <td style="font-size:0.8rem;color:var(--text-muted);">{{ p[7][:10] if p[7] else '—' }}</td>
+          <td>
+            <form method="POST" action="{{ url_for('delete_patient', pid=p[0]) }}"
+                  onsubmit="return confirm('Delete patient {{ p[1] }}?')">
+              <button type="submit" class="btn btn-danger btn-sm">🗑 Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div style="text-align:center;padding:48px;color:var(--text-muted);">
+    <div style="font-size:3rem;margin-bottom:12px;">🔍</div>
+    <p>No patients found{% if query %} for "{{ query }}"{% endif %}.</p>
+    <a href="{{ url_for('add_patient') }}" class="btn btn-primary" style="margin-top:16px;display:inline-flex;">➕ Add First Patient</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

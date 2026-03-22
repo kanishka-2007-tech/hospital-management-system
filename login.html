@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — MediCore</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'DM Sans',sans-serif;
+    min-height:100vh; display:flex;
+    background: linear-gradient(135deg, #0f1c3f 0%, #1a3a7a 50%, #0f2f5a 100%);
+  }
+  .left {
+    flex:1; display:flex; flex-direction:column; justify-content:center;
+    padding:60px; color:#fff;
+  }
+  .brand { font-family:'Syne',sans-serif; font-size:2.8rem; font-weight:800; margin-bottom:12px; }
+  .brand span { color:#06b6a2; }
+  .tagline { font-size:1rem; color:rgba(255,255,255,0.6); max-width:340px; line-height:1.6; }
+  .features { margin-top:48px; display:flex; flex-direction:column; gap:16px; }
+  .feature { display:flex; align-items:center; gap:14px; }
+  .feature .dot { width:36px; height:36px; border-radius:10px; background:rgba(6,182,162,0.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+  .feature p { font-size:0.9rem; color:rgba(255,255,255,0.75); }
+
+  .right {
+    width:460px; display:flex; align-items:center; justify-content:center;
+    padding:40px; background:rgba(255,255,255,0.04); backdrop-filter:blur(12px);
+    border-left:1px solid rgba(255,255,255,0.08);
+  }
+  .login-box { width:100%; }
+  .login-box h2 { font-family:'Syne',sans-serif; font-size:1.8rem; color:#fff; margin-bottom:6px; }
+  .login-box p { color:rgba(255,255,255,0.5); font-size:0.88rem; margin-bottom:32px; }
+
+  .form-group { display:flex; flex-direction:column; gap:7px; margin-bottom:18px; }
+  label { font-size:0.8rem; font-weight:600; color:rgba(255,255,255,0.6); letter-spacing:0.5px; text-transform:uppercase; }
+  input {
+    padding:13px 16px; border:1.5px solid rgba(255,255,255,0.12);
+    border-radius:12px; background:rgba(255,255,255,0.07);
+    color:#fff; font-family:'DM Sans',sans-serif; font-size:0.92rem; outline:none;
+    transition:border 0.2s;
+  }
+  input::placeholder { color:rgba(255,255,255,0.3); }
+  input:focus { border-color:#06b6a2; }
+
+  .btn-login {
+    width:100%; padding:14px; background:#1a56db; color:#fff; border:none;
+    border-radius:12px; font-family:'DM Sans',sans-serif; font-size:1rem;
+    font-weight:700; cursor:pointer; transition:all 0.2s; margin-top:8px;
+  }
+  .btn-login:hover { background:#1040a0; transform:translateY(-2px); }
+
+  .error { background:rgba(229,62,62,0.15); border:1px solid rgba(229,62,62,0.3); color:#fc8181; padding:12px 16px; border-radius:10px; font-size:0.88rem; margin-bottom:18px; }
+  .hint { background:rgba(6,182,162,0.1); border:1px solid rgba(6,182,162,0.25); color:#5eead4; padding:12px 16px; border-radius:10px; font-size:0.82rem; margin-bottom:20px; }
+  .register-link { text-align:center; margin-top:20px; font-size:0.85rem; color:rgba(255,255,255,0.5); }
+  .register-link a { color:#06b6a2; text-decoration:none; font-weight:600; }
+
+  @media(max-width:768px) { .left { display:none; } .right { width:100%; } }
+</style>
+</head>
+<body>
+  <div class="left">
+    <div class="brand">🏥 Medi<span>Core</span></div>
+    <p class="tagline">A complete hospital management system for modern healthcare teams.</p>
+    <div class="features">
+      <div class="feature"><div class="dot">👤</div><p>Patient records & history</p></div>
+      <div class="feature"><div class="dot">📅</div><p>Appointment scheduling</p></div>
+      <div class="feature"><div class="dot">📊</div><p>Live dashboard & analytics</p></div>
+      <div class="feature"><div class="dot">🔌</div><p>REST API access</p></div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="login-box">
+      <h2>Welcome back</h2>
+      <p>Sign in to access the dashboard</p>
+      <div class="hint">🔑 Default: <strong>admin</strong> / <strong>admin123</strong></div>
+      {% if error %}<div class="error">⚠ {{ error }}</div>{% endif %}
+      <form method="POST">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" name="username" placeholder="Enter username" required autofocus>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn-login">Sign In →</button>
+      </form>
+      <div class="register-link">Don't have an account? <a href="/register">Register</a></div>
+    </div>
+  </div>
+</body>
+</html>
